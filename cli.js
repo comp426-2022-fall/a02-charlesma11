@@ -16,25 +16,25 @@ async function process_args() {
       -d 0-6        Day to retrieve weather: 0 is today; defaults to 1. \n\
       -j            Echo pretty JSON from open-meteo API and exit.'
     );
-    return 0;
-  }
-
-  if (args.j) {
-    return 0;
+    process.exit();
   }
 
   const timezone = args.z ? args.z : moment.tz.guess();
   const longitude = args.n ? args.n : args.s;
   const latitude = args.e ? args.e : args.w;
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${longitude}&longitude=${latitude}&daily=precipitation_hours&temperature_unit=fahrenheit&timezone=${timezone}&start_date=2022-09-22&end_date=2022-09-29`;
+  const start = moment().format('YYYY-MM-DD');
+  const end = moment().add(7, 'days').format('YYYY-MM-DD');
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${longitude}&longitude=${latitude}&daily=precipitation_hours&current_weather=true&temperature_unit=fahrenheit&timezone=${timezone}&start_date=${start}&end_date=${end}`;
   const response = await fetch(url);
   const data = await response.json();
 
-  if (!args.d) {
-  }
-
   const days = args.d ? args.d : 1;
   let dayPhrase = '';
+
+  if (args.j) {
+    console.log(JSON.stringify(data));
+    process.exit();
+  }
 
   if (days == 0) {
     dayPhrase = 'today.';
@@ -44,12 +44,12 @@ async function process_args() {
     dayPhrase = 'tomorrow.';
   }
 
-  if (data['daily']['precipitation_hours']['days'] != 0) {
+  if (data['daily']['precipitation_hours'][days] != 0) {
     console.log(`You might need your galoshes ${dayPhrase}`);
   } else {
     console.log(`You will not need your galoshes ${dayPhrase}`);
   }
-  return 0;
+  process.exit();
 }
 
 process_args(args);
