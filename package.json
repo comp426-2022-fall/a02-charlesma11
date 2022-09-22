@@ -1,0 +1,28 @@
+{
+  "scripts": {
+    "test": "node cli.js -n 35.92 -w 79.05 -z America/New_York"
+  },
+  "dependencies": {
+    "minimist": "^1.2.6",
+    "moment-timezone": "^0.5.37",
+    "node-fetch": "^3.2.10"
+  },
+  "name": "charles",
+  "description": "This assignment will help you learn to create an installable Node.js command line utility.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comp426-2022-fall/a02-charlesma11.git"
+  },
+  "author": "cma11",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/comp426-2022-fall/a02-charlesma11/issues"
+  },
+  "homepage": "https://github.com/comp426-2022-fall/a02-charlesma11#readme",
+  "type": "module",
+  "bin": {
+    "galosh.js": "cli.js"
+  }
+}
