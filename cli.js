@@ -16,12 +16,12 @@ async function process_args() {
       -d 0-6        Day to retrieve weather: 0 is today; defaults to 1. \n\
       -j            Echo pretty JSON from open-meteo API and exit.'
     );
-    process.exit();
+    process.exit(0);
   }
 
   const timezone = args.z ? args.z : moment.tz.guess();
-  const longitude = args.n ? args.n : args.s;
-  const latitude = args.e ? args.e : args.w;
+  const longitude = args.n ? args.n : args.s * -1;
+  const latitude = args.e ? args.e : args.w * -1;
   const start = moment().format('YYYY-MM-DD');
   const end = moment().add(7, 'days').format('YYYY-MM-DD');
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${longitude}&longitude=${latitude}&daily=precipitation_hours&current_weather=true&temperature_unit=fahrenheit&timezone=${timezone}&start_date=${start}&end_date=${end}`;
@@ -33,7 +33,7 @@ async function process_args() {
 
   if (args.j) {
     console.log(JSON.stringify(data));
-    process.exit();
+    process.exit(0);
   }
 
   if (days == 0) {
@@ -49,7 +49,6 @@ async function process_args() {
   } else {
     console.log(`You will not need your galoshes ${dayPhrase}`);
   }
-  process.exit();
 }
 
 process_args(args);
