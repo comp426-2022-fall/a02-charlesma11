@@ -28,12 +28,16 @@ async function process_args() {
   const response = await fetch(url);
   const data = await response.json();
 
-  const days = args.d ? args.d : 1;
+  let days = args.d ? args.d : 1;
   let dayPhrase = '';
 
   if (args.j) {
     console.log(JSON.stringify(data));
     process.exit(0);
+  }
+
+  if (args._ == 'today') {
+    days = 0;
   }
 
   if (days == 0) {
@@ -44,6 +48,7 @@ async function process_args() {
     dayPhrase = 'tomorrow.';
   }
 
+  console.log(data);
   if (data['daily']['precipitation_hours'][days] != 0) {
     console.log(`You might need your galoshes ${dayPhrase}`);
   } else {

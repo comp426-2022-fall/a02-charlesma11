@@ -16,7 +16,7 @@
     "url": "git+https://github.com/comp426-2022-fall/a02-charlesma11.git"
   },
   "author": "cma11",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": " GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/comp426-2022-fall/a02-charlesma11/issues"
   },
@@ -24,5 +24,6 @@
   "type": "module",
   "bin": {
     "galosh.js": "cli.js"
-  }
+  },
+  "devDependencies": {}
 }
