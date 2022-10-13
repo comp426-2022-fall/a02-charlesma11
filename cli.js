@@ -31,13 +31,13 @@ async function process_args() {
   let days = args.d ? args.d : 1;
   let dayPhrase = '';
 
+  if (args.d == 0) {
+    days = 0;
+  }
+
   if (args.j) {
     console.log(JSON.stringify(data));
     process.exit(0);
-  }
-
-  if (args._ == 'today') {
-    days = 0;
   }
 
   if (days == 0) {
